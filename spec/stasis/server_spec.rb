@@ -6,7 +6,7 @@ describe Stasis::Server do
   before(:all) do
     generate
     @thread = Thread.new do
-      Stasis::Server.new($fixture, :server => 'localhost:6379/0')
+      Stasis::Server.new($fixture, :redis => 'localhost:6379/0')
     end
   end
 
