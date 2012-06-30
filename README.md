@@ -21,7 +21,7 @@ Stasis can run as a server that uses [redis](http://redis.io) to wait for render
 
 Stasis server that uses redis on port 6379:
 
-    $ stasis -r localhost:6379/0
+    $ stasis-server -r localhost:6379/0
 
 Push to the server (in Ruby):
 
