@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(File.dirname(__FILE__) + "/../lib/stasis/server")
+
+gem "slop", "~> 2.1.0"
+require 'slop'
+
+slop = Slop.parse :help => true, :optional_arguments => true do
+  on :r, :redis, "Redis URI (default: localhost:6379/0)", :default => "localhost:6379/0"
+end
+
+exit if slop.help?
+options = slop.to_hash
+
+Stasis::Server.new(Dir.pwd, options)
