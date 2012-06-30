@@ -3,4 +3,5 @@
 .bundle
 Gemfile.lock
 pkg
+spec/fixtures/project/public
 tmp
