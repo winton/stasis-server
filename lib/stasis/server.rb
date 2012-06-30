@@ -11,9 +11,9 @@ class Stasis
   class Server
 
     def initialize(root, options={})
-      puts "\nStarting Stasis server (redis @ #{options[:server]})..."
+      puts "\nStarting Stasis server (redis @ #{options[:redis]})..."
 
-      redis = Redis.connect(:url => "redis://#{options[:server]}")
+      redis = Redis.connect(:url => "redis://#{options[:redis]}")
       stasis = Stasis.new(*[ root, options[:public], options ].compact)
       retries = 0
 
