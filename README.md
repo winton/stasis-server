@@ -1,36 +1,52 @@
-Stasis-server
-===========
+Stasis::Server
+==============
 
-A gem template for new projects.
+Redis-backed queue for Stasis render jobs
 
-Requirements
-------------
+[![Build Status](https://secure.travis-ci.org/winton/stasis-server.png)](http://travis-ci.org/winton/stasis-server)
 
-<pre>
-gem install stencil
-</pre>
+Install
+-------
 
-Setup the template
-------------------
+Install via [RubyGems](http://rubygems.org/pages/download):
 
-You only have to do this once.
+<!-- language:console -->
 
-<pre>
-git clone git@github.com:winton/stasis-server.git
-cd stasis-server
-stencil
-</pre>
+    $ gem install stasis-server
 
-Setup a new project
--------------------
+Server Mode
+-----------
 
-Do this for every new project.
+Stasis can run as a server that uses [redis](http://redis.io) to wait for render jobs.
 
-<pre>
-mkdir my_project
-git init
-stencil stasis-server
-rake rename
-</pre>
+Stasis server that uses redis on port 6379:
 
-The last command does a find-replace (gem\_template -> my\_project) on files and filenames.
+    $ stasis -r localhost:6379/0
+
+Push to the server (in Ruby):
+
+    Stasis::Server.push(
+      # Paths to render
+      :paths => [ "index.html.haml", "subdirectory" ],
+
+      # Made available to views as `params`
+      :params => {},
+
+      # Redis address
+      :redis => "localhost:6379/0",
+
+      # Return rendered templates (false by default)
+      :return => false,
+
+      # Block until templates generate (false by default)
+      :wait => false,
+
+      # Write to the filesystem (true by default)
+      :write => true,
+
+      # Cache ttl for returned templates (nil by default)
+      :ttl => nil,
+
+      # Force write even if cached (false by default)
+      :force => false
+    )
